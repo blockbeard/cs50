@@ -25,8 +25,9 @@ bool search(int value, int values[], int n)
     
     while (length > 0)
     {
+        length = endpos - startpos;
         printf("\nStartpos = %i, endpos = %i\n", startpos, endpos);
-        for(int i = startpos; i < endpos; i++)
+        for(int i = startpos; i <= endpos; i++)
         {
             printf("%i ", values[i]);
         }
@@ -35,17 +36,14 @@ bool search(int value, int values[], int n)
             {
                 return true;
             }
-        
-        
         else if(values[startpos + ((endpos-startpos)/2)] > value)
-        {
-            endpos = (endpos-startpos)/2;
-        }
+            {
+                endpos = (endpos-startpos)/2 -1;
+            }
         else if(values[startpos + ((endpos-startpos)/2)] < value)
-        {
-            startpos = n/2;
-        }
-        length = endpos - startpos;
+            {
+                startpos = startpos + ((endpos-startpos)/2) + 1;
+            }
     }
     return false;
     }
