@@ -159,7 +159,22 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+    int temp;
+    int total = d*d -1;
+    for (int i = 0; i<d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            board[i][j] = total;
+            total--;
+        }
+    }
+    if(d%2 == 0)
+    {
+        temp = board[d-1][d-2];
+        board[d-1][d-2] = board[d-1][d-3];
+        board[d-1][d-3] = temp;
+    }
 }
 
 /**
@@ -167,7 +182,21 @@ void init(void)
  */
 void draw(void)
 {
-    // TODO
+     for (int i = 0; i<d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] == 0)
+            {
+                printf(" \t");
+            }
+            else
+            {
+            printf("%i\t", board[i][j]);
+            }
+        }
+        printf("\n\n");
+    }
 }
 
 /**
@@ -176,7 +205,57 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // TODO
+    int tilerow = 4;
+    int tilecol = 4;
+    int blankrow = 4;
+    int blankcol = 4;
+    int temp;
+    
+    for(int i = 0; i < d; i++)
+    {
+        for(int j = 0; j < d; j++)
+        {
+            if(board[i][j] == tile)
+            {
+                tilerow = i;
+                tilecol = j;
+            }
+            else if(board[i][j] == 0)
+            {
+                blankrow = i;
+                blankcol = j;
+            }
+            temp = 0;
+        }
+        if (tilerow - blankrow == 1 && tilecol - blankcol == 0)
+        {
+           temp = board[tilerow][tilecol];
+           board[tilerow][tilecol] = board[blankrow][blankcol];
+           board[blankrow][blankcol] = temp;
+           return true;
+        }
+        else if (tilerow - blankrow == -1 && tilecol - blankcol == 0)
+        {
+           temp = board[tilerow][tilecol];
+           board[tilerow][tilecol] = board[blankrow][blankcol];
+           board[blankrow][blankcol] = temp;
+           return true;
+        }
+        else if (tilecol - blankcol == 1 && tilerow - blankrow == 0)
+        {
+           temp = board[tilerow][tilecol];
+           board[tilerow][tilecol] = board[blankrow][blankcol];
+           board[blankrow][blankcol] = temp;
+           return true;
+        }
+        else if (tilecol - blankcol == -1 && tilerow - blankrow == 0)
+        {
+           temp = board[tilerow][tilecol];
+           board[tilerow][tilecol] = board[blankrow][blankcol];
+           board[blankrow][blankcol] = temp;
+           return true;
+        }
+    }
     return false;
 }
 
@@ -186,6 +265,31 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
-    return false;
+    int winconfig[d*d];
+    int boardconfig[d*d];
+    int k = 0;
+    for(int i = 0; i < d*d; i++)
+    {
+       winconfig[i] = i +1;
+    }
+    winconfig[d*d - 1] = 0;
+    
+    for (int i = 0; i<d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+           boardconfig[k] = board[i][j];
+           k++;
+        }
+    }
+    
+    for (int l = 0; l < d*d; l++)
+    {
+      if (winconfig[l] != boardconfig[l])
+        {
+        return false;
+        }  
+    }
+    return true;
+    
 }
