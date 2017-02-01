@@ -1,0 +1,24 @@
+0.  JPEG 16.7 million, GIF 256, PNG 256 Trillion, BMP 16.7 million
+1.  GIF
+2.  Lossless compression allows recovery of all the original data whan a file is uncompressed. Lossy compression permanently discards some of the (hopefully) redundant information. 
+3.  JPEG
+4.  The file name is changed to indicate it is "deleted" and the clusters where the file is stored are added to the list of free clusters. 
+5.  Use a sanitiser program to overwrite the file data or destroy the data either physically or by use of a degausser. 
+6.  stdint.h is a header that defines standard definitions of integer types to allow better portability of code. It defines the widths (number of bits required to stite its valus) of the types and their minimum and maximum values.     
+7.  Using the types specified means that we will know how many bytes the integer uses, this is useful because it allows the allocation of a block of memory the right  size to contain the expected value. 
+8.  BYTE: 1 byte, DWORD: 4 bytes, LONG: 4 bytes, WORD: 2 bytes
+9.  ASCII: BM Decimal: 66 77 Hex: 42 4D
+10. bfSize is the size, in bytes of the bitmap file. biSize is the size in bytes of the structure, in this case the structure is the BITMAPINFOHEADER, so bfSize is the size of the whole file whereas biSIze is the size of just the header. 
+11. if biHeight is negative this indicates a top-down bitmap and the origin is the toip left corner. 
+12. The colour depth is specified by biBitCount
+13. fopen will return NULL if it is unable to opeen the file in the specified mode. It may be open in another program, there may be a problem with permissions or the path may be incorrect. 
+14. The third element of fread specifies the number of elements of data to read. Since the specified elements are either BITMAPINFOHEADER that should only occur once, or RGBTRIPLE which it iterates over repeatedly it only needs to read each piece of information once.      
+15.  padding =  (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4
+     padding =  (4 - (3 * 3)) % 4) % 4
+     padding =  (4 - 9) % 4) % 4
+     padding =  ( - 5) % 4) % 4
+     padding =  3 % 4
+     padding =  3
+16. fseek changes the location of the file pointer. The file pointer is the value that determines which location the read or write operation will occur at. 
+17. SEEK_CURR is a constant defined as the current position of the file pointer. 
+18. Rick Astley
